@@ -8,6 +8,7 @@ import {
 } from "react-native";
 
 const initialState = {
+  email: "",
   login: "",
   password: "",
 };
@@ -34,10 +35,10 @@ function RegistrationScreen({ isShowKey, setIsShowKey, keybordHide }) {
         <TextInput
           style={styles.input}
           textAlign={"center"}
-          value={state.login}
+          value={state.email}
           onFocus={() => setIsShowKey(true)}
           onChangeText={(value) =>
-            setState((prev) => ({ ...prev, login: value }))
+            setState((prev) => ({ ...prev, email: value }))
           }
         />
       </View>
