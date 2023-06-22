@@ -5,7 +5,9 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  Image,
 } from "react-native";
+import img from "../assets/image/Rectangle.png";
 
 const initialState = {
   email: "",
@@ -25,29 +27,19 @@ function RegistrationScreen({ isShowKey, setIsShowKey, keybordHide }) {
     alert("No data");
   };
   return (
-    <View style={{ ...styles.form, marginBottom: isShowKey ? 20 : 150 }}>
+    <View style={{ ...styles.form, marginBottom: isShowKey ? -240 : 0 }}>
+      <View style={styles.img}>
+        <Image source={img} />
+      </View>
       <View style={styles.header}>
-        <Text style={styles.title}>Please enter your registration details</Text>
+        <Text style={styles.title}>Реєстрація</Text>
       </View>
-
       <View>
-        <Text style={styles.text}>EMAIL</Text>
         <TextInput
+          placeholderTextColor={"#BDBDBD"}
+          placeholder={"Логін"}
+          selectionColor={"#FF6C00"}
           style={styles.input}
-          textAlign={"center"}
-          value={state.email}
-          onFocus={() => setIsShowKey(true)}
-          onChangeText={(value) =>
-            setState((prev) => ({ ...prev, email: value }))
-          }
-        />
-      </View>
-
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.text}>LOGIN</Text>
-        <TextInput
-          style={styles.input}
-          textAlign={"center"}
           value={state.login}
           onFocus={() => setIsShowKey(true)}
           onChangeText={(value) =>
@@ -55,14 +47,30 @@ function RegistrationScreen({ isShowKey, setIsShowKey, keybordHide }) {
           }
         />
       </View>
-
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.text}>PASSWORD</Text>
+      <View style={{ marginTop: 16 }}>
         <TextInput
+          placeholderTextColor={"#BDBDBD"}
+          inputMode={"email"}
+          keyboardType={"email-address"}
+          placeholder={"Адреса електронної пошти"}
+          selectionColor={"#FF6C00"}
           style={styles.input}
-          textAlign={"center"}
+          value={state.login}
+          onFocus={() => setIsShowKey(true)}
+          onChangeText={(value) =>
+            setState((prev) => ({ ...prev, login: value }))
+          }
+        />
+      </View>
+      <View style={{ marginTop: 16 }}>
+        <TextInput
+          placeholderTextColor={"#BDBDBD"}
+          keyboardType={"password"}
+          placeholder={"••••••••••••"}
+          style={styles.input}
           value={state.password}
           secureTextEntry={true}
+          selectionColor={"#FF6C00"}
           onFocus={() => setIsShowKey(true)}
           onChangeText={(value) =>
             setState((prev) => ({ ...prev, password: value }))
@@ -71,53 +79,73 @@ function RegistrationScreen({ isShowKey, setIsShowKey, keybordHide }) {
       </View>
 
       <TouchableOpacity style={styles.button} onPress={hendlerPress}>
-        <Text style={styles.buttonText}>REGISTR</Text>
+        <Text style={styles.buttonText}>Зареєстуватися</Text>
       </TouchableOpacity>
+      <View style={styles.bottomText}>
+        <Text>Вже є акаунт? Увійти</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   form: {
-    marginHorizontal: 40,
+    backgroundColor: "#FFFFFF",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+  },
+  img: {
+    position: "absolute",
+    left: 128,
+    bottom: 489,
+    width: 120,
+    height: 120,
+    backgroundColor: "#F6F6F6",
+    borderRadius: 16,
   },
   header: {
-    marginBottom: 40,
-    textAlign: "center",
+    marginTop: 92,
+    marginBottom: 32,
+    alignItems: "center",
   },
   title: {
-    fontSize: 20,
-    color: "#F0FFF0",
-  },
-  text: {
-    marginBottom: 10,
-    color: "#F0FFF0",
-    fontSize: 20,
     fontWeight: 500,
+    fontSize: 30,
+    color: "#212121",
   },
+
   input: {
+    marginHorizontal: 16,
     height: 40,
     borderWidth: 1,
-    borderColor: "#F0FFF0",
+    borderColor: "#E8E8E8",
     borderRadius: 10,
     padding: 10,
-    color: "#F0FFF0",
+    color: "#212121",
     fontSize: 15,
   },
   button: {
-    marginHorizontal: 30,
-    marginTop: 40,
-    height: 40,
-    borderRadius: 10,
-    borderColor: "#F0FFF0",
+    marginHorizontal: 16,
+    marginTop: 43,
+    marginBottom: 16,
+    height: 51,
+    borderRadius: 100,
     borderWidth: 1,
     alignItems: "center",
-    backgroundColor: "transparent",
-    padding: 10,
+    borderColor: "#FF6C00",
+    backgroundColor: "#FF6C00",
+    paddingLeft: 32,
+    paddingRight: 32,
+    paddingTop: 16,
+    paddingBottom: 16,
   },
   buttonText: {
-    color: "#F0FFF0",
+    color: "#FfFFFf",
     fontSize: 16,
+  },
+  bottomText: {
+    marginBottom: 111,
+    alignItems: "center",
   },
 });
 

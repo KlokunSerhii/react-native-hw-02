@@ -1,10 +1,10 @@
 import { useState } from "react";
 import {
   View,
-  StyleSheet,
   TextInput,
   Text,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
 
 const initialState = {
@@ -24,16 +24,18 @@ function LoginScreen({ isShowKey, setIsShowKey, keybordHide }) {
     alert("Enter LOGIN & PASSWORD");
   };
   return (
-    <View style={{ ...styles.form, marginBottom: isShowKey ? 20 : 150 }}>
+    <View style={{ ...styles.form, marginBottom: isShowKey ? -230 : 0 }}>
       <View style={styles.header}>
-        <Text style={styles.title}>WELCOME</Text>
+        <Text style={styles.title}>Увійти</Text>
       </View>
-
       <View>
-        <Text style={styles.text}>LOGIN</Text>
         <TextInput
+          placeholderTextColor={"#BDBDBD"}
+          inputMode={"email"}
+          keyboardType={"email-address"}
+          placeholder={"Адреса електронної пошти"}
+          selectionColor={"#FF6C00"}
           style={styles.input}
-          textAlign={"center"}
           value={state.login}
           onFocus={() => setIsShowKey(true)}
           onChangeText={(value) =>
@@ -41,69 +43,80 @@ function LoginScreen({ isShowKey, setIsShowKey, keybordHide }) {
           }
         />
       </View>
-
-      <View style={{ marginTop: 20 }}>
-        <Text style={styles.text}>PASSWORD</Text>
+      <View style={{ marginTop: 16 }}>
         <TextInput
+          placeholderTextColor={"#BDBDBD"}
+          keyboardType={"password"}
+          placeholder={"••••••••••••"}
           style={styles.input}
-          textAlign={"center"}
           value={state.password}
           secureTextEntry={true}
+          selectionColor={"#FF6C00"}
           onFocus={() => setIsShowKey(true)}
           onChangeText={(value) =>
             setState((prev) => ({ ...prev, password: value }))
           }
         />
       </View>
-
       <TouchableOpacity style={styles.button} onPress={hendlerPress}>
-        <Text style={styles.buttonText}>LOGIN</Text>
+        <Text style={styles.buttonText}>Увійти</Text>
       </TouchableOpacity>
+      <View style={styles.bottomText}>
+        <Text>Немає акаунту? Зареєструватися</Text>
+      </View>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   form: {
-    marginHorizontal: 40,
+    backgroundColor: "#FFFFFF",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
   },
   header: {
-    marginBottom: 40,
-    textAlign: "center",
+    marginTop: 32,
+    marginBottom: 32,
+    alignItems: "center",
   },
   title: {
-    fontSize: 40,
-    color: "#F0FFF0",
-  },
-  text: {
-    marginBottom: 10,
-    color: "#F0FFF0",
-    fontSize: 20,
     fontWeight: 500,
+    fontSize: 30,
+    color: "#212121",
   },
+
   input: {
+    marginHorizontal: 16,
     height: 40,
     borderWidth: 1,
-    borderColor: "#F0FFF0",
+    borderColor: "#E8E8E8",
     borderRadius: 10,
     padding: 10,
-    color: "#F0FFF0",
+    color: "#212121",
     fontSize: 15,
   },
   button: {
-    marginHorizontal: 30,
-    marginTop: 40,
-    height: 40,
-    borderRadius: 10,
-    borderColor: "#F0FFF0",
+    marginHorizontal: 16,
+    marginTop: 43,
+    marginBottom: 16,
+    height: 51,
+    borderRadius: 100,
     borderWidth: 1,
     alignItems: "center",
-    backgroundColor: "transparent",
-    padding: 10,
+    borderColor: "#FF6C00",
+    backgroundColor: "#FF6C00",
+    paddingLeft: 32,
+    paddingRight: 32,
+    paddingTop: 16,
+    paddingBottom: 16,
   },
   buttonText: {
-    color: "#F0FFF0",
+    color: "#FfFFFf",
     fontSize: 16,
   },
+  bottomText: {
+    marginBottom: 111,
+    alignItems: "center",
+  },
 });
+
 export default LoginScreen;

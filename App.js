@@ -11,7 +11,7 @@ import {
 import PostsScreen from "./Screens/PostsScreen";
 import RegistrationScreen from "./Components/RegistrationScreen";
 import LoginScreen from "./Components/LoginScreen";
-import img from "./assets/image/img.jpg";
+import img from "./assets/image/img-bg.png";
 import { useState } from "react";
 
 export default function App() {
@@ -23,27 +23,27 @@ export default function App() {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={keybordHide}>
-      <View style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={keybordHide}>
         <ImageBackground style={styles.img} source={img}>
-          <KeyboardAvoidingView  behavior={Platform.OS == "ios" ? "padding" : "height"}>
-            <LoginScreen
-              isShowKey={isShowKey}
-              setIsShowKey={setIsShowKey}
-              keybordHide={keybordHide}
-            />
-            <RegistrationScreen
-              isShowKey={isShowKey}
-              setIsShowKey={setIsShowKey}
-              keybordHide={keybordHide}
-            />
-            <PostsScreen />
-          </KeyboardAvoidingView>
-
-          <StatusBar style="auto" />
+          <LoginScreen
+            isShowKey={isShowKey}
+            setIsShowKey={setIsShowKey}
+            keybordHide={keybordHide}
+          />
+          <RegistrationScreen
+            isShowKey={isShowKey}
+            setIsShowKey={setIsShowKey}
+            keybordHide={keybordHide}
+          />
+          <PostsScreen />
         </ImageBackground>
-      </View>
-    </TouchableWithoutFeedback>
+      </TouchableWithoutFeedback>
+      <StatusBar style="auto" />
+    </KeyboardAvoidingView>
   );
 }
 
