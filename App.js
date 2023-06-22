@@ -8,10 +8,10 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import PostsScreen from "./src/Screens/PostsScreen";
-import RegistrationScreen from "./src/components/RegistrationScreen";
-import LoginScreen from "./src/components/LoginScreen";
-import img from "./src/image/img.jpg";
+import PostsScreen from "./Screens/PostsScreen";
+import RegistrationScreen from "./Components/RegistrationScreen";
+import LoginScreen from "./Components/LoginScreen";
+import img from "./assets/image/img.jpg";
 import { useState } from "react";
 
 export default function App() {
