@@ -6,11 +6,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
-import PostsScreen from "./Screens/PostsScreen";
-import RegistrationScreen from "./Screens/RegistrationScreen";
-import LoginScreen from "./Screens/LoginScreen";
-import img from "./image/img.jpg";
+import PostsScreen from "./src/Screens/PostsScreen";
+import RegistrationScreen from "./src/components/RegistrationScreen";
+import LoginScreen from "./src/components/LoginScreen";
+import img from "./src/image/img.jpg";
 import { useState } from "react";
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
     <TouchableWithoutFeedback onPress={keybordHide}>
       <View style={styles.container}>
         <ImageBackground style={styles.img} source={img}>
-          <KeyboardAvoidingView>
+          <KeyboardAvoidingView  behavior={Platform.OS == "ios" ? "padding" : "height"}>
             <LoginScreen
               isShowKey={isShowKey}
               setIsShowKey={setIsShowKey}
