@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { useNavigation } from '@react-navigation/native';
-import { KeyboardAvoidingView } from "react-native";
 import {
   View,
   TextInput,
@@ -9,6 +7,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  Platform,
+  Keyboard
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import img from "../assets/image/Rectangle.png";
