@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigation } from '@react-navigation/native';
 import {
   View,
   TextInput,
@@ -21,6 +22,7 @@ const initialState = {
 function RegistrationScreen() {
   const [state, setState] = useState(initialState);
   const [isShowKey, setIsShowKey] = useState(false);
+  const navigation = useNavigation();
 
 
   const keybordHide = () => {
@@ -90,10 +92,18 @@ function RegistrationScreen() {
                       }
               />
             </View>
-            <TouchableOpacity style={styles.button} onPress={keybordHide}>
+            <TouchableOpacity 
+            style={styles.button} 
+            onPress={() =>  {
+              navigation.navigate("Post"),
+              keybordHide}}
+              >
               <Text style={styles.buttonText}>Зареєстуватися</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.bottomText}>
+            <TouchableOpacity 
+            style={styles.bottomText}
+            onPress={() => navigation.navigate("Registration")}
+            >
               <Text>Вже є акаунт?<Text>Увійти</Text> </Text>
             </TouchableOpacity>
         </View>

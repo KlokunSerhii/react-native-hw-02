@@ -1,6 +1,9 @@
 import { View } from "react-native";
 function PostsScreen() {
-  return <View></View>;
+  return( 
+  <View>
+    <Text>PostsScreen</Text>
+  </View>)
 }
 
 export default PostsScreen;
