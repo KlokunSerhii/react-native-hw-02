@@ -46,7 +46,6 @@ function LoginScreen({ isShowKey, setIsShowKey, keybordHide }) {
       <View style={{ marginTop: 16 }}>
         <TextInput
           placeholderTextColor={"#BDBDBD"}
-          keyboardType={"password"}
           placeholder={"••••••••••••"}
           style={styles.input}
           value={state.password}
