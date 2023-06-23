@@ -7,6 +7,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  Platform,
+  Keyboard
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import img from "../assets/image/Rectangle.png";
