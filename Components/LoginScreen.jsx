@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { KeyboardAvoidingView } from "react-native";
 import {
   View,
   TextInput,
