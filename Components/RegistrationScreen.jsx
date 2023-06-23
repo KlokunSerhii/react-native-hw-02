@@ -8,12 +8,14 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  KeyboardAvoidingView,
   Platform,
   Keyboard,
+  Image,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import img from "../assets/image/Rectangle.png";
+import img from "../assets/image/img-bg.png";
+import foto from "../assets/image/Rectangle.png";
+import { ImageBackground } from "react-native";
 
 const initialState = {
   email: "",
@@ -27,13 +29,9 @@ function RegistrationScreen() {
   const navigation = useNavigation();
 
   const keybordHide = () => {
-    if (state.login !== "" || state.password !== "") {
-      Keyboard.dismiss();
-      setState(initialState);
-      setIsShowKey(false);
-      return;
-    }
-    alert("No dat");
+    Keyboard.dismiss();
+    setState(initialState);
+    setIsShowKey(false);
   };
 
   return (
@@ -42,10 +40,10 @@ function RegistrationScreen() {
       style={styles.container}
     >
       <TouchableWithoutFeedback onPress={keybordHide}>
-        <ImageBackground style={styles.img} source={img}>
+        <ImageBackground style={styles.imgBg} source={img}>
           <View style={{ ...styles.form, marginBottom: isShowKey ? -240 : 0 }}>
             <View style={styles.img}>
-              <Image source={img} />
+              <Image source={foto} />
             </View>
             <View style={styles.header}>
               <Text style={styles.title}>Реєстрація</Text>
@@ -81,7 +79,6 @@ function RegistrationScreen() {
             <View style={{ marginTop: 16 }}>
               <TextInput
                 placeholderTextColor={"#BDBDBD"}
-                keyboardType={"password"}
                 placeholder={"••••••••••••"}
                 style={styles.input}
                 value={state.password}
@@ -103,10 +100,10 @@ function RegistrationScreen() {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.bottomText}
-              onPress={() => navigation.navigate("Registration")}
+              onPress={() => navigation.navigate("Login")}
             >
               <Text>
-                Вже є акаунт?<Text>Увійти</Text>{" "}
+                Вже є акаунт?<Text>Увійти</Text>
               </Text>
             </TouchableOpacity>
           </View>
@@ -122,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#F0FFF0",
   },
-  img: {
+  imgBg: {
     flex: 1,
     resizeMode: "cover",
     justifyContent: "flex-end",

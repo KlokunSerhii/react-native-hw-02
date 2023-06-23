@@ -1,9 +1,10 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 function PostsScreen() {
-  return( 
-  <View>
-    <Text>PostsScreen</Text>
-  </View>)
+  return (
+    <View>
+      <Text>PostsScreen</Text>
+    </View>
+  );
 }
 
 export default PostsScreen;

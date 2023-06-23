@@ -9,9 +9,11 @@ import {
   TouchableWithoutFeedback,
   Platform,
   Keyboard,
+  ImageBackground,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import img from "../assets/image/Rectangle.png";
+import img from "../assets/image/img-bg.png";
+import { useNavigation } from "@react-navigation/native";
 
 const initialState = {
   login: "",
@@ -24,14 +26,11 @@ function LoginScreen() {
   const navigation = useNavigation();
 
   const keybordHide = () => {
-    if (state.login !== "" || state.password !== "") {
-      Keyboard.dismiss();
-      setState(initialState);
-      setIsShowKey(false);
-      return;
-    }
-    alert("Enter LOGIN & PASSWORD");
+    Keyboard.dismiss();
+    setState(initialState);
+    setIsShowKey(false);
   };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -61,7 +60,6 @@ function LoginScreen() {
             <View style={{ marginTop: 16 }}>
               <TextInput
                 placeholderTextColor={"#BDBDBD"}
-                keyboardType={"password"}
                 placeholder={"••••••••••••"}
                 style={styles.input}
                 value={state.password}
