@@ -1,60 +1,22 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import 'react-native-gesture-handler';
+import { createStackNavigator } from "@react-navigation/stack";
 import PostsScreen from "./Screens/PostsScreen";
 import RegistrationScreen from "./Components/RegistrationScreen";
 import LoginScreen from "./Components/LoginScreen";
-import img from "./assets/image/img-bg.png";
-import { useState } from "react";
+
+const Stack = createStackNavigator(); 
 
 export default function App() {
-  const [isShowKey, setIsShowKey] = useState(false);
-
-  const keybordHide = () => {
-    Keyboard.dismiss();
-    setIsShowKey(false);
-  };
-
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <TouchableWithoutFeedback onPress={keybordHide}>
-        <ImageBackground style={styles.img} source={img}>
-          <LoginScreen
-            isShowKey={isShowKey}
-            setIsShowKey={setIsShowKey}
-            keybordHide={keybordHide}
-          />
-          <RegistrationScreen
-            isShowKey={isShowKey}
-            setIsShowKey={setIsShowKey}
-            keybordHide={keybordHide}
-          />
-          <PostsScreen />
-        </ImageBackground>
-      </TouchableWithoutFeedback>
-      <StatusBar style="auto" />
-    </KeyboardAvoidingView>
+        <NavigationContainer>  
+          <Stack.Navigator initialRouteName="Login">   
+            <Stack.Screen name="Login" component={LoginScreen}/>  
+            <Stack.Screen name="Registration" component={RegistrationScreen}/>
+            <Stack.Screen name="Post" component={PostsScreen}/>     
+          </Stack.Navigator>        
+        </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#F0FFF0",
-  },
-  img: {
-    flex: 1,
-    resizeMode: "cover",
-    justifyContent: "flex-end",
-  },
-});
+

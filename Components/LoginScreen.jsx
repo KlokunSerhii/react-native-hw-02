@@ -5,68 +5,108 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Platform,
+  Keyboard,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import img from "../assets/image/Rectangle.png";
 
 const initialState = {
   login: "",
   password: "",
 };
 
-function LoginScreen({ isShowKey, setIsShowKey, keybordHide }) {
+function LoginScreen() {
   const [state, setState] = useState(initialState);
-  const hendlerPress = () => {
+  const [isShowKey, setIsShowKey] = useState(false);
+  const navigation = useNavigation();
+
+  const keybordHide = () => {
     if (state.login !== "" || state.password !== "") {
-      keybordHide();
+      Keyboard.dismiss();
       setState(initialState);
-      console.log(state);
+      setIsShowKey(false);
       return;
     }
     alert("Enter LOGIN & PASSWORD");
   };
   return (
-    <View style={{ ...styles.form, marginBottom: isShowKey ? -230 : 0 }}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Увійти</Text>
-      </View>
-      <View>
-        <TextInput
-          placeholderTextColor={"#BDBDBD"}
-          inputMode={"email"}
-          keyboardType={"email-address"}
-          placeholder={"Адреса електронної пошти"}
-          selectionColor={"#FF6C00"}
-          style={styles.input}
-          value={state.login}
-          onFocus={() => setIsShowKey(true)}
-          onChangeText={(value) =>
-            setState((prev) => ({ ...prev, login: value }))
-          }
-        />
-      </View>
-      <View style={{ marginTop: 16 }}>
-        <TextInput
-          placeholderTextColor={"#BDBDBD"}
-          placeholder={"••••••••••••"}
-          style={styles.input}
-          value={state.password}
-          secureTextEntry={true}
-          selectionColor={"#FF6C00"}
-          onFocus={() => setIsShowKey(true)}
-          onChangeText={(value) =>
-            setState((prev) => ({ ...prev, password: value }))
-          }
-        />
-      </View>
-      <TouchableOpacity style={styles.button} onPress={hendlerPress}>
-        <Text style={styles.buttonText}>Увійти</Text>
-      </TouchableOpacity>
-      <View style={styles.bottomText}>
-        <Text>Немає акаунту? Зареєструватися</Text>
-      </View>
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={keybordHide}>
+        <ImageBackground style={styles.img} source={img}>
+          <View style={{ ...styles.form, marginBottom: isShowKey ? -230 : 0 }}>
+            <View style={styles.header}>
+              <Text style={styles.title}>Увійти</Text>
+            </View>
+            <View>
+              <TextInput
+                placeholderTextColor={"#BDBDBD"}
+                inputMode={"email"}
+                keyboardType={"email-address"}
+                placeholder={"Адреса електронної пошти"}
+                selectionColor={"#FF6C00"}
+                style={styles.input}
+                value={state.login}
+                onFocus={() => setIsShowKey(true)}
+                onChangeText={(value) =>
+                  setState((prev) => ({ ...prev, login: value }))
+                }
+              />
+            </View>
+            <View style={{ marginTop: 16 }}>
+              <TextInput
+                placeholderTextColor={"#BDBDBD"}
+                keyboardType={"password"}
+                placeholder={"••••••••••••"}
+                style={styles.input}
+                value={state.password}
+                secureTextEntry={true}
+                selectionColor={"#FF6C00"}
+                onFocus={() => setIsShowKey(true)}
+                onChangeText={(value) =>
+                  setState((prev) => ({ ...prev, password: value }))
+                }
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate("Post"), keybordHide;
+              }}
+            >
+              <Text style={styles.buttonText}>Увійти</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.bottomText}
+              onPress={() => navigation.navigate("Registration")}
+            >
+              <Text>
+                Немає акаунту?<Text>Зареєструватися</Text>{" "}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
+      </TouchableWithoutFeedback>
+      <StatusBar style="auto" />
+    </KeyboardAvoidingView>
   );
 }
+
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F0FFF0",
+  },
+  img: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "flex-end",
+  },
   form: {
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 25,
