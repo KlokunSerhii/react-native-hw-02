@@ -20,25 +20,27 @@ const initialState = {
   password: "",
 };
 
-function LoginScreen() {
+function LoginScreen({ onLayoutRootView }) {
   const [state, setState] = useState(initialState);
   const [isShowKey, setIsShowKey] = useState(false);
   const navigation = useNavigation();
 
   const keybordHide = () => {
     Keyboard.dismiss();
-    setState(initialState);
     setIsShowKey(false);
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <TouchableWithoutFeedback onPress={keybordHide}>
+    <TouchableWithoutFeedback onPress={keybordHide}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
         <ImageBackground style={styles.img} source={img}>
-          <View style={{ ...styles.form, marginBottom: isShowKey ? -230 : 0 }}>
+          <View
+            style={{ ...styles.form, marginBottom: isShowKey ? -90 : 0 }}
+            onLayout={onLayoutRootView}
+          >
             <View style={styles.header}>
               <Text style={styles.title}>Увійти</Text>
             </View>
@@ -74,7 +76,7 @@ function LoginScreen() {
             <TouchableOpacity
               style={styles.button}
               onPress={() => {
-                navigation.navigate("Post"), keybordHide;
+                navigation.navigate("Home"), setState(initialState);
               }}
             >
               <Text style={styles.buttonText}>Увійти</Text>
@@ -84,14 +86,14 @@ function LoginScreen() {
               onPress={() => navigation.navigate("Registration")}
             >
               <Text>
-                Немає акаунту?<Text>Зареєструватися</Text>{" "}
+                Немає акаунту?<Text>Зареєструватися</Text>
               </Text>
             </TouchableOpacity>
           </View>
         </ImageBackground>
-      </TouchableWithoutFeedback>
-      <StatusBar style="auto" />
-    </KeyboardAvoidingView>
+        <StatusBar style="auto" />
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 }
 
